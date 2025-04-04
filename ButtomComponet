@@ -1,0 +1,68 @@
+import React, { forwardRef } from "react";
+import { Button } from "@mui/material";
+import { styled } from "@mui/system";
+import { Loader } from "Components/Loader/Loader";
+
+// Styled MUI button
+export const StyledButton = styled(Button)(({ theme }) => ({
+  border: `1px solid ${theme.palette.primary.main}`,
+  margin: "0 15px 0 0",
+  backgroundColor: theme.palette.primary.main,
+  color: "#fff",
+  "&:hover": {
+    backgroundColor: "#fff",
+    borderColor: theme.palette.primary.main,
+    color: theme.palette.primary.main,
+  },
+  "&.linkBtn": {
+    color: theme.palette.primary.main,
+    backgroundColor: "transparent",
+    border: 0,
+  },
+  "&:disabled": {
+    opacity: "0.4",
+    color: theme.palette.white.main,
+  },
+}));
+
+// CustomButton component with proper forwardRef usage
+const CustomButton = forwardRef(
+  (
+    {
+      color,
+      onClick,
+      disabled,
+      startIcon,
+      endIcon,
+      size,
+      children,
+      type = "button", // Default type to "button"
+      className,
+      loading,
+      ...props
+    },
+    ref
+  ) => {
+    return loading ? (
+      <Loader />
+    ) : (
+      <StyledButton
+        ref={ref}
+        color={color}
+        onClick={onClick}
+        disabled={disabled}
+        startIcon={startIcon}
+        endIcon={endIcon}
+        size={size}
+        type={type} // Use type directly from props
+        className={className}
+        disableRipple
+        {...props}
+      >
+        {children}
+      </StyledButton>
+    );
+  }
+);
+
+export default CustomButton;
