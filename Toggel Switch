@@ -1,0 +1,38 @@
+import { Box, styled } from "@mui/system";
+import React from "react";
+
+export const StyledSwitch = styled("div")(({ theme }) => ({
+  border: `1px solid ${theme.palette.success.main}`,
+  margin: "0 15px 0 0",
+  backgroundColor: "#0056b8",
+  color: "#fff",
+  "&:hover": {
+    backgroundColor: theme.palette.white.main,
+    borderColor: theme.palette.primary.main,
+    color: "#0056b8",
+  },
+  "&.linkBtn": {
+    color: "#0056b8",
+    backgroundColor: "transparent",
+    border: 0,
+  },
+}));
+
+const SwitchComponent = ({ checked, value, onChange }) => {
+  return (
+    <StyledSwitch>
+      <Box className="toggle">
+        <input
+          type="checkbox"
+          checked={checked}
+          value={value}
+          onChange={onChange}
+        />
+        <span className="on">ON</span>
+        <span className="off">OFF</span>
+      </Box>
+    </StyledSwitch>
+  );
+};
+
+export default SwitchComponent;
