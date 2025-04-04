@@ -1,0 +1,57 @@
+import React from "react";
+import { Pagination, PaginationItem } from "@mui/material";
+import { styled } from "@mui/system";
+import ArrowLeftIcon from "Components/Icons/ArrowIcons/ArrowLeftIcon";
+import ArrowRightIcon from "Components/Icons/ArrowIcons/ArrowRightIcon";
+import DoubleLeftArrowIcon from "Components/Icons/ArrowIcons/DoubleLeftArrowIcon";
+import DoubleRightArrowIcon from "Components/Icons/ArrowIcons/DoubleRightArrowIcon";
+
+const FePaginationStyles = styled("div")(({ theme }) => ({
+  margin: '24px auto 0',
+  flex: '0 0 100%',
+  textAlign: 'center',
+  nav: {
+    ul: {
+      justifyContent: "center",
+      li: {
+        button: {
+          backgroundColor: "transparent",
+          color: theme.palette.gray_800.main,
+          fontWeight: '500!important',
+          "&:is(:hover, .Mui-selected)": {
+            backgroundColor: "transparent",
+            color: theme.palette.primaryColor.main,
+          },
+        },
+      },
+    },
+  }
+}));
+
+const FePaginationComp = ({ count, onChange, page }) => {
+  return (
+    <FePaginationStyles className="fePagination">
+      <Pagination
+        className="fePageComp"
+        renderItem={(item) => (
+          <PaginationItem
+            slots={{
+              previous: ArrowLeftIcon,
+              next: ArrowRightIcon,
+              first: DoubleLeftArrowIcon,
+              last: DoubleRightArrowIcon,
+            }}
+            {...item}
+          />
+        )}
+        count={count}
+        onChange={onChange}
+        page={page}
+        showFirstButton
+        showLastButton
+      />
+    </FePaginationStyles>
+  );
+};
+
+export default FePaginationComp;
