@@ -1,0 +1,24 @@
+import { Backdrop, CircularProgress } from "@mui/material";
+import { LoaderStyle } from "./LoaderStyle";
+import CircularWithValueLabel from "Components/CircularProgressWithLabel/CircularProgressWithLabel";
+
+const Loader = ({ status = true, size, className }) => {
+  if (status) {
+    return (
+      <LoaderStyle className={className ? className : ""}>
+        <CircularProgress size={size} />
+      </LoaderStyle>
+    );
+  }
+};
+export { Loader };
+
+export const BackdropLoader = ({ open, progress }) => {
+  return (
+    <LoaderStyle className="backdropMain">
+      <Backdrop className="backdrop" open={open}>
+        {progress ? <CircularWithValueLabel value={progress} /> : <Loader />}
+      </Backdrop>
+    </LoaderStyle>
+  );
+};
