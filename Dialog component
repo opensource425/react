@@ -1,0 +1,78 @@
+import React from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  IconButton,
+} from "@mui/material";
+import { Box } from "@mui/system";
+import { Close } from "@mui/icons-material";
+import { DialogCommanStyle } from "./DialogCommanStyles";
+import { useTranslation } from "react-i18next";
+
+const DialogCommon = (props) => {
+  const {
+    open,
+    handleClose,
+    children,
+    title,
+    contentText,
+    fullWidth,
+    hideclone,
+    maxWidth,
+    extraPaperClasses,
+    titleClass,
+  } = props;
+
+  const { i18n } = useTranslation();
+
+  return (
+    <Dialog
+      fullWidth={fullWidth}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+      open={open}
+      onClose={handleClose}
+      maxWidth={maxWidth ? maxWidth : "sm"}
+      disableRestorefocus
+      className="commonDialog-outer"
+      classes={{ paper: `dynamic_class_popup ${extraPaperClasses}` }}
+    >
+      <DialogCommanStyle>
+        <Box className={`dialogMain  ${i18n.language}`}>
+          {title && (
+            <DialogTitle
+              id="alert-dialog-title"
+              className={`popup-title-outer ${titleClass}`}
+            >
+              <Box display="flex" alignItems="center">
+                <Box flexGrow={1} className="popupTitle">
+                  {title}
+                </Box>
+                {!hideclone && (
+                  <Box className="popup-icon">
+                    <IconButton onClick={handleClose}>
+                      <Close />
+                    </IconButton>
+                  </Box>
+                )}
+              </Box>
+            </DialogTitle>
+          )}
+
+          <DialogContent>
+            {contentText && (
+              <DialogContentText id="alert-dialog-description">
+                <span dangerouslySetInnerHTML={{ __html: contentText }} />
+              </DialogContentText>
+            )}
+            {children}
+          </DialogContent>
+        </Box>
+      </DialogCommanStyle>
+    </Dialog>
+  );
+};
+
+export default DialogCommon;
