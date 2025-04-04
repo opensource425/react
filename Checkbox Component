@@ -1,0 +1,81 @@
+import React from "react";
+import { styled } from "@mui/system";
+
+const StyledCheckbox = styled("input")(({ theme }) => ({
+  appearance: "none",
+  width: "16px",
+  height: "16px",
+  margin: "0",
+  position: "relative",
+  top: "1px",
+  flexShrink: 0,
+  cursor: "pointer",
+  "&.uploadCheckbox": {
+    width: "32px",
+    height: "32px",
+    "&:after": {
+      background: theme.palette.white.main,
+    },
+    "&:checked": {
+      "&:before": {
+        width: "20px",
+        height: "10px",
+        border: "3px solid #fff",
+        top: "8px",
+        left: "6px",
+        borderTop: "0",
+        borderRight: "0",
+      },
+    },
+  },
+  "&:after": {
+    content: "''",
+    width: "100%",
+    height: "100%",
+    border: "1px solid #BDC0C4",
+    position: "absolute",
+    top: "0px",
+    left: "0",
+    borderRadius: "4px",
+    pointerEvent: "none",
+  },
+  "&:checked": {
+    "&:after": {
+      backgroundColor: theme.palette.primaryColor.main,
+      borderColor: theme.palette.primaryColor.main,
+    },
+    "&:before": {
+      content: "''",
+      position: "absolute",
+      width: "10px",
+      height: "5px",
+      border: "2px solid #fff",
+      zIndex: "1",
+      top: "5px",
+      left: "3px",
+      transform: "rotate(-45deg)",
+      borderTop: "0",
+      borderRight: "0",
+    },
+  },
+  "&:disabled": {
+    backgroundColor: theme.palette.gray_300.main,
+    borderRadius: "4px",
+  },
+  "&.partiallyChecked": {
+    "&:checked": {
+      "&:after": {
+        backgroundColor: theme.palette.whiteColor.main,
+      },
+      "&:before": {
+        borderColor: theme.palette.primaryColor.main,
+      },
+    },
+  },
+}));
+
+const SingleCheckbox = (props) => {
+  return <StyledCheckbox type="checkbox" {...props} />;
+};
+
+export default SingleCheckbox;
